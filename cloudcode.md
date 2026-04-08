@@ -1,3 +1,5 @@
+github repository: psenna/go-pdf
+
 # Core Philosophy
 Spec-Driven Development: No code is written without a corresponding specification/test.
 
@@ -24,8 +26,3 @@ Explicit Error Handling: Never ignore errors. Handle them explicitly and return 
 Concurrency: Use goroutines and channels only when necessary and ensure they are properly synchronized/closed.
 
 Documentation: Provide concise comments for exported functions and complex logic.
-
-# Architectural Strategy
-Apply the Dependency Inversion Principle.
-
-Use interfaces to decouple components, making them easily mockable for unit tests.
