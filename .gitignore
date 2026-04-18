@@ -1,0 +1,5 @@
+# Binaries
+go-pdf
+
+# Runtime data
+*.log
