@@ -9,6 +9,7 @@ import (
 
 // SetupRouter configures all routes for the application.
 func SetupRouter() *gin.Engine {
+	// Set gin test mode
 	gin.SetMode(gin.TestMode)
 
 	r := gin.Default()
@@ -22,6 +23,8 @@ func SetupRouter() *gin.Engine {
 		data, _ := os.ReadFile("templates/shrink.html")
 		c.HTML(http.StatusOK, "text/html", data)
 	})
+
+	r.POST("/api/pdf/merge", gin.WrapF(MergeHandler))
 
 	return r
 }
