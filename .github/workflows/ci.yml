@@ -20,6 +20,15 @@ jobs:
       - name: Download dependencies
         run: go mod download
 
+      - name: Install pdfcpu
+        run: |
+          curl -L -o pdfcpu.tar.gz https://github.com/pdfcpu/pdfcpu/releases/download/v0.6.0/pdfcpu_linux_amd64.tar.gz
+          mkdir -p /usr/local/bin
+          tar -xzf pdfcpu.tar.gz -C /usr/local/bin
+          chmod +x /usr/local/bin/pdfcpu
+          rm pdfcpu.tar.gz
+          pdfcpu --version
+
       - name: Run tests
         run: go test ./... -v
 
