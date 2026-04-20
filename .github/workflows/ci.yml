@@ -22,11 +22,33 @@ jobs:
 
       - name: Install pdfcpu
         run: |
-          curl -L -o pdfcpu.tar.gz https://github.com/pdfcpu/pdfcpu/releases/download/v0.6.0/pdfcpu_linux_amd64.tar.gz
-          mkdir -p /usr/local/bin
-          tar -xzf pdfcpu.tar.gz -C /usr/local/bin
+          # Install pdfcpu from GitHub releases
+          # Use a more robust approach: list releases and extract the correct asset
+          echo "Fetching pdfcpu releases. .."
+
+          # Get latest release tag and list all releases
+          LATEST_TAG=$(curl -s "https://api.github.com/repos/pdfcpu/pdfcpu/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/' | tr -d 'v')
+          echo "Latest release: $LATEST_TAG"
+
+          # Download from latest release URL
+          ASSET_URL="https://github.com/pdfcpu/pdfcpu/releases/download/${LATEST_TAG}/pdfcpu_${LATEST_TAG}_linux_amd64.tar.gz"
+          echo "Downloading from: $ASSET_URL"
+
+          wget -q --show-progress -O /tmp/pdfcpu.tar.gz "$ASSET_URL" || \
+            curl -L -o /tmp/pdfcpu.tar.gz "$ASSET_URL"
+
+          if [ ! -s /tmp/pdfcpu.tar.gz ]; then
+            echo "Error: Download failed or file is empty"
+            exit 1
+          fi
+
+          echo "Extracting pdfcpu to /usr/local/bin..."
+          tar -xzf /tmp/pdfcpu.tar.gz -C /usr/local/bin pdfcpu || \
+            echo "Error: Failed to extract pdfcpu" && exit 1
+
           chmod +x /usr/local/bin/pdfcpu
-          rm pdfcpu.tar.gz
+          rm -f /tmp/pdfcpu.tar.gz
+          echo "Installing pdfcpu version:"
           pdfcpu --version
 
       - name: Run tests
