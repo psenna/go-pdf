@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	tempDir     = "/tmp"
+	tempDir      = "/tmp"
 	maxFilenameLen = 32
 )
 
