@@ -27,7 +27,7 @@ func CreateTempFile(content []byte) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	path := fmt.Sprintf("%s/%s", tempDir, filename)
+	path := fmt.Sprintf("%s/%s.pdf", tempDir, filename)
 	if err := os.WriteFile(path, content, 0600); err != nil {
 		return "", err
 	}
