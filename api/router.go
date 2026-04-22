@@ -25,6 +25,7 @@ func SetupRouter() *gin.Engine {
 	})
 
 	r.POST("/api/pdf/merge", gin.WrapF(MergeHandler))
+	r.POST("/api/pdf/extract", gin.WrapF(ExtractHandler))
 
 	return r
 }
@@ -47,6 +48,7 @@ func SetupRouterForTests() *gin.Engine {
 	})
 
 	r.POST("/api/pdf/merge", gin.WrapF(MergeHandler))
+	r.POST("/api/pdf/extract", gin.WrapF(ExtractHandler))
 
 	return r
 }

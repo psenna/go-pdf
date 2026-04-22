@@ -13,4 +13,8 @@ var (
 	ErrNoFilesUploaded      = errors.New("no files uploaded")
 	ErrMergeFailed          = errors.New("PDF merge failed")
 	ErrInvalidPDFFormat     = errors.New("invalid PDF format for merge")
+
+	// Text extraction errors
+	ErrTextExtractionFailed = errors.New("text extraction failed")
+	ErrNoTextFound          = errors.New("no text found in PDF")
 )

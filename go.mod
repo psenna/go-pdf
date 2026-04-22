@@ -5,6 +5,7 @@ go 1.25.0
 require (
 	github.com/gin-gonic/gin v1.12.0
 	github.com/pdfcpu/pdfcpu v0.5.0
+	github.com/razvandimescu/gopdf v0.8.0
 )
 
 require (
